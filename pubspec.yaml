@@ -1,0 +1,37 @@
+name: preo
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0-259.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.9.3
+  dart_style: ^3.0.1
+  flutter_svg: ^2.0.17
+  flutter_animate: ^4.5.2
+  get: ^4.6.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/images/explainer/
+    - assets/logos/
+    - assets/images/splash/
+
+fonts:
+  - family: Inter
+  - fonts:
+      - assets/fonts/Inter.ttf
+      - assets/fonts/Inter.ttf
+      - assets/fonts/Inter.ttf
