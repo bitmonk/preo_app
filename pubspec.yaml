@@ -14,6 +14,8 @@ dependencies:
   flutter_svg: ^2.0.17
   flutter_animate: ^4.5.2
   get: ^4.6.6
+  intl: ^0.20.2
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
@@ -29,9 +31,7 @@ flutter:
     - assets/logos/
     - assets/images/splash/
 
-fonts:
-  - family: Inter
-  - fonts:
-      - assets/fonts/Inter.ttf
-      - assets/fonts/Inter.ttf
-      - assets/fonts/Inter.ttf
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter.ttf

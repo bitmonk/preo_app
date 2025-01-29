@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:preo/features/authentication/signup/signup.dart';
+import 'package:preo/features/onboarding/explainer/explainer.dart';
 import 'package:preo/features/onboarding/splash/splash_screen.dart';
 
 class Routes {
@@ -14,7 +14,7 @@ class Routes {
     ),
     GetPage(
       name: explainer,
-      page: () => Signup(),
+      page: () => Explainer(),
     )
   ];
 }

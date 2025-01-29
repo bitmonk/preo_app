@@ -20,6 +20,9 @@ class MainApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Inter',
+          ),
           home: SplashScreen(),
           initialRoute: Routes.getSplashRoute(),
           getPages: Routes.routes,
