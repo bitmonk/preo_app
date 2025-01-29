@@ -4,6 +4,7 @@ import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
+import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/helpers/helper_functions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -35,48 +36,48 @@ class _ExplainerState extends State<Explainer> {
               color: Colors.black.withAlpha(130),
             ),
           ),
-          // Image.asset(Images.logoWhite),
-
           Positioned(
             bottom: 48.h,
-            left: 32.w,
+            // left: 32.w,
             child: Container(
               color: Colors.transparent,
-              // height: 220.h,
-              width: 366.w,
+              width: DeviceUtils.getScreenWidth(context) * 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 250.w,
-                    child: Text(
-                      'Welcome to Preo!',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: Sizes.explainerTitle,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    height: DeviceUtils.getScreenHeight() * 0.8,
+                    child: PageView(
+                      children: [
+                        OnboardingContent(
+                          title: 'Welcome to Preo!',
+                          subTitle:
+                              'Get ready to experience the excitement of predictions with virtual Preo rewards.',
+                        ),
+                        OnboardingContent(
+                          title: 'Predict with Preos',
+                          subTitle:
+                              'Use your knowledge and your skill, for free  and win Preos – the virtual currency',
+                        ),
+                        OnboardingContent(
+                          title: 'Join the Competition',
+                          subTitle:
+                              'Join a group and challenge friends for the top spot.',
+                        ),
+                        OnboardingContent(
+                          title: 'Ready to Play',
+                          subTitle:
+                              'You’re all set to start making predictions and climbing the leaderboard.',
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  SizedBox(
-                    width: 334.w,
-                    child: Text(
-                      'Get ready to experience the excitement of predictions with virtual Preo rewards.',
-                      style: TextStyle(
-                        fontSize: Sizes.miniSubHeading,
-                        color: AppColors.white,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 32.w),
+                    child: SmoothPageIndicator(
+                      controller: PageController(),
+                      count: 4,
                     ),
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  SmoothPageIndicator(
-                    controller: PageController(),
-                    count: 4,
                   ),
                   SizedBox(
                     height: 62.h,
@@ -90,6 +91,57 @@ class _ExplainerState extends State<Explainer> {
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OnboardingContent extends StatelessWidget {
+  const OnboardingContent({
+    super.key,
+    required this.title,
+    required this.subTitle,
+  });
+
+  final String title;
+  final String subTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 32.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(
+            width: 250.w,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: Sizes.explainerTitle,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 32.h,
+          ),
+          SizedBox(
+            width: 334.w,
+            child: Text(
+              subTitle,
+              style: TextStyle(
+                fontSize: Sizes.miniSubHeading,
+                color: AppColors.white,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 32.h,
           ),
         ],
       ),
@@ -128,7 +180,7 @@ class OnboardingPage extends StatelessWidget {
         ),
         Positioned.fill(
           child: Container(
-            color: Colors.black.withAlpha(150), // Adjust opacity (0.0 - 1.0)
+            color: Colors.black.withAlpha(150),
           ),
         ),
         Positioned(
