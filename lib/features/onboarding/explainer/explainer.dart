@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
-import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/helpers/helper_functions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Explainer extends StatefulWidget {
   const Explainer({super.key});
-
   @override
   State<Explainer> createState() => _ExplainerState();
 }
@@ -18,25 +17,79 @@ class _ExplainerState extends State<Explainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
+      body: Stack(
         children: [
-          OnboardingPage(
-            image: Images.explainer1,
-            title: 'Welcome to \nPreo!',
-            subtitle:
-                'Get ready to experience the excitement of predictions with virtual Preo rewards.',
+          Column(
+            children: [
+              Image(
+                height: HelperFunctions.screenHeight() * 1,
+                width: HelperFunctions.screenWidth() * 1,
+                image: AssetImage(Images.explainer1),
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
+            ],
           ),
-          OnboardingPage(
-            image: Images.explainer2,
-            title: 'asdf to \nPreo!',
-            subtitle:
-                'Get ready to experience the excitement of predictions with virtual Preo rewards.',
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withAlpha(130),
+            ),
           ),
-          OnboardingPage(
-            image: Images.explainer3,
-            title: 'Welcome to \nPreo!',
-            subtitle:
-                'Get ready to experience the excitement of predictions with virtual Preo rewards.',
+          // Image.asset(Images.logoWhite),
+
+          Positioned(
+            bottom: 48.h,
+            left: 32.w,
+            child: Container(
+              color: Colors.transparent,
+              // height: 220.h,
+              width: 366.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 250.w,
+                    child: Text(
+                      'Welcome to Preo!',
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: Sizes.explainerTitle,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32.h,
+                  ),
+                  SizedBox(
+                    width: 334.w,
+                    child: Text(
+                      'Get ready to experience the excitement of predictions with virtual Preo rewards.',
+                      style: TextStyle(
+                        fontSize: Sizes.miniSubHeading,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32.h,
+                  ),
+                  SmoothPageIndicator(
+                    controller: PageController(),
+                    count: 4,
+                  ),
+                  SizedBox(
+                    height: 62.h,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: PrimaryButton(
+                      btnText: 'Get Started',
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -62,15 +115,12 @@ class OnboardingPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                Transform.scale(
-                  scale: 1.8,
-                  child: Image(
-                    height: HelperFunctions.screenHeight() * 1,
-                    width: HelperFunctions.screenWidth() * 1,
-                    image: AssetImage(image),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                  ),
+                Image(
+                  height: HelperFunctions.screenHeight() * 1,
+                  width: HelperFunctions.screenWidth() * 1,
+                  image: AssetImage(image),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
                 ),
               ],
             ),

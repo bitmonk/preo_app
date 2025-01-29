@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:preo/features/onboarding/explainer/explainer.dart';
 import 'package:preo/features/onboarding/splash/splash_screen.dart';
 import 'package:preo/utils/routes/routes.dart';
 
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Inter',
           ),
-          home: SplashScreen(),
+          home: Explainer(),
           initialRoute: Routes.getSplashRoute(),
           getPages: Routes.routes,
         );
