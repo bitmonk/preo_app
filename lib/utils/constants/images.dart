@@ -5,5 +5,6 @@ class Images {
   // Onboarding Images ->
   static const String explainer1 = 'assets/images/explainer/explainer1.png';
   static const String explainer2 = 'assets/images/explainer/explainer2.png';
-  static const String explainer3 = 'assets/images/explainer/explainer2.png';
+  static const String explainer3 = 'assets/images/explainer/explainer3.png';
+  static const String explainer4 = 'assets/images/explainer/explainer4.png';
 }

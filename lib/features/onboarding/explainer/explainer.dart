@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:preo/common/widgets/primary_button.dart';
+import 'package:preo/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -17,17 +19,22 @@ class Explainer extends StatefulWidget {
 class _ExplainerState extends State<Explainer> {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnboardingController());
+
     return Scaffold(
       body: Stack(
         children: [
           Column(
             children: [
-              Image(
-                height: HelperFunctions.screenHeight() * 1,
-                width: HelperFunctions.screenWidth() * 1,
-                image: AssetImage(Images.explainer1),
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
+              Obx(
+                () => Image(
+                  height: HelperFunctions.screenHeight() * 1,
+                  width: HelperFunctions.screenWidth() * 1,
+                  image: AssetImage(controller
+                      .backgroundImages[controller.currentPageIndex.value]),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
               ),
             ],
           ),
@@ -38,7 +45,6 @@ class _ExplainerState extends State<Explainer> {
           ),
           Positioned(
             bottom: 48.h,
-            // left: 32.w,
             child: Container(
               color: Colors.transparent,
               width: DeviceUtils.getScreenWidth(context) * 1,
@@ -48,7 +54,9 @@ class _ExplainerState extends State<Explainer> {
                   SizedBox(
                     height: DeviceUtils.getScreenHeight() * 0.8,
                     child: PageView(
-                      children: [
+                      controller: controller.pageController,
+                      onPageChanged: controller.updatePageIndicator,
+                      children: const [
                         OnboardingContent(
                           title: 'Welcome to Preo!',
                           subTitle:
@@ -74,18 +82,29 @@ class _ExplainerState extends State<Explainer> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 32.w),
-                    child: SmoothPageIndicator(
-                      controller: PageController(),
-                      count: 4,
+                    child: Obx(
+                      () => AnimatedSmoothIndicator(
+                        activeIndex: controller.currentPageIndex.value,
+                        count: 4,
+                        effect: ExpandingDotsEffect(
+                          activeDotColor: AppColors.primary,
+                          dotColor: AppColors.splashDot,
+                          dotHeight: 12,
+                        ),
+                        onDotClicked: controller.dotNavigationClick,
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 62.h,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      btnText: 'Get Started',
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: 366.w,
+                      child: PrimaryButton(
+                        btnText: 'Get Started',
+                      ),
                     ),
                   ),
                 ],
@@ -145,87 +164,6 @@ class OnboardingContent extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String image, title, subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        PageView(
-          children: [
-            Column(
-              children: [
-                Image(
-                  height: HelperFunctions.screenHeight() * 1,
-                  width: HelperFunctions.screenWidth() * 1,
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                ),
-              ],
-            ),
-          ],
-        ),
-        Positioned.fill(
-          child: Container(
-            color: Colors.black.withAlpha(150),
-          ),
-        ),
-        Positioned(
-          bottom: 70.h,
-          left: 32.w,
-          child: Container(
-            color: Colors.transparent,
-            height: 382.h,
-            width: 366.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: Sizes.explainerTitle,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: 32.h,
-                ),
-                SizedBox(
-                  width: 334.w,
-                  child: Text(
-                    'Get ready to experience the excitement of predictions with virtual Preo rewards.',
-                    style: TextStyle(
-                      fontSize: Sizes.miniSubHeading,
-                      color: AppColors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 32.h,
-                ),
-                SmoothPageIndicator(
-                  controller: PageController(),
-                  count: 4,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
