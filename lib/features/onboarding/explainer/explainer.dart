@@ -10,13 +10,9 @@ import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/helpers/helper_functions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Explainer extends StatefulWidget {
+class Explainer extends StatelessWidget {
   const Explainer({super.key});
-  @override
-  State<Explainer> createState() => _ExplainerState();
-}
 
-class _ExplainerState extends State<Explainer> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OnboardingController());
@@ -28,8 +24,8 @@ class _ExplainerState extends State<Explainer> {
             children: [
               Obx(
                 () => Image(
-                  height: HelperFunctions.screenHeight() * 1,
-                  width: HelperFunctions.screenWidth() * 1,
+                  height: HelperFunctions.screenHeight(),
+                  width: HelperFunctions.screenWidth(),
                   image: AssetImage(controller
                       .backgroundImages[controller.currentPageIndex.value]),
                   fit: BoxFit.cover,
@@ -45,9 +41,8 @@ class _ExplainerState extends State<Explainer> {
           ),
           Positioned(
             bottom: 48.h,
-            child: Container(
-              color: Colors.transparent,
-              width: DeviceUtils.getScreenWidth(context) * 1,
+            child: SizedBox(
+              width: DeviceUtils.getScreenWidth(context),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -65,7 +60,7 @@ class _ExplainerState extends State<Explainer> {
                         OnboardingContent(
                           title: 'Predict with Preos',
                           subTitle:
-                              'Use your knowledge and your skill, for free  and win Preos – the virtual currency',
+                              'Use your knowledge and your skill, for free and win Preos – the virtual currency',
                         ),
                         OnboardingContent(
                           title: 'Join the Competition',
@@ -75,7 +70,7 @@ class _ExplainerState extends State<Explainer> {
                         OnboardingContent(
                           title: 'Ready to Play',
                           subTitle:
-                              'You’re all set to start making predictions and climbing the leaderboard.',
+                              "You're all set to start making predictions and climbing the leaderboard.",
                         ),
                       ],
                     ),
@@ -91,19 +86,28 @@ class _ExplainerState extends State<Explainer> {
                           dotColor: AppColors.splashDot,
                           dotHeight: 12,
                         ),
-                        onDotClicked: controller.dotNavigationClick,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 62.h,
-                  ),
+                  SizedBox(height: 62.h),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SizedBox(
                       width: 366.w,
-                      child: PrimaryButton(
-                        btnText: 'Get Started',
+                      child: Obx(
+                        () {
+                          String getButtonText(int index) {
+                            if (index == 0) return 'Get Started';
+                            if (index == 3) return 'Let\'s Go!';
+                            return 'Next';
+                          }
+
+                          return PrimaryButton(
+                            btnText: getButtonText(
+                                controller.currentPageIndex.value),
+                            onPressed: controller.nextPage,
+                          );
+                        },
                       ),
                     ),
                   ),

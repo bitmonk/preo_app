@@ -6,8 +6,10 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
     required this.btnText,
+    required this.onPressed,
   });
 
+  final VoidCallback onPressed;
   final String btnText;
 
   @override
@@ -27,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
           Size.fromHeight(56.h),
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(btnText),
     );
   }
