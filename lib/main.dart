@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Inter',
           ),
-          initialRoute: Routes.getSplashRoute(),
+          initialRoute: Routes.getSignupRoute(),
           getPages: Routes.routes,
         );
       },

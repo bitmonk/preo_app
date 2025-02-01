@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -11,8 +12,11 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('data'),
+      body: Container(
+        color: Colors.green,
+        child: Column(
+          children: [],
+        ),
       ),
     );
   }
