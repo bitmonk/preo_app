@@ -1,5 +1,6 @@
 class Images {
-  static const String logoWhite = '/assets/logos/logoWhite.png';
+  static const String logoWhite = 'assets/logos/logoWhite.png';
+  static const String logoBlack = 'assets/logos/logoBlack.png';
   static const String splashBg = 'assets/images/splash/background.png';
 
   // Onboarding Images ->

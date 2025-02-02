@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Sizes {
@@ -9,6 +10,11 @@ class Sizes {
   static final subTitle = 16.sp;
   static final text = 14.sp;
 
-  // default
-  
+  // FontWeight
+  static FontWeight font6 = FontWeight.w600;
+
+  // Default spacing between sections
+  static double defaultSpace = 48.h;
+  static double spaceBtwItems = 16.h;
+  static double spaceBtwSections = 56.h;
 }
