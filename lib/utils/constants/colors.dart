@@ -8,7 +8,9 @@ class AppColors {
   static const Color bgColor = Color(0xFFFBF8F8);
   static const Color white = Color(0xFFFFFFFF);
   static const Color splashDot = Color(0xFFFFFAFA);
+  static const Color inputBorder = Color(0xFFCFD4D9);
 
   // Font Colors ->
   static const Color titleColor = Color(0xFF0E2741);
+  static const Color formTextColor = Color(0xFF56687A);
 }
