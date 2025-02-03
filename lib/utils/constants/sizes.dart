@@ -14,7 +14,8 @@ class Sizes {
   static FontWeight font6 = FontWeight.w600;
 
   // Default spacing between sections
+  static double spaceBtwSections = 56.h;
   static double defaultSpace = 48.h;
   static double spaceBtwItems = 16.h;
-  static double spaceBtwSections = 56.h;
+  static double mdSpace = 24.h;
 }

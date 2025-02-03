@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:preo/utils/constants/colors.dart';
+import 'package:preo/utils/constants/sizes.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -30,7 +31,13 @@ class PrimaryButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(btnText),
+      child: Text(
+        btnText,
+        style: TextStyle(
+          color: AppColors.white,
+          fontWeight: Sizes.font6,
+        ),
+      ),
     );
   }
 }
