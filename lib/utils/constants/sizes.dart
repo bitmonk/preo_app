@@ -16,6 +16,9 @@ class Sizes {
   // Default spacing between sections
   static double spaceBtwSections = 56.h;
   static double defaultSpace = 48.h;
-  static double spaceBtwItems = 16.h;
+  static double largeSpace = 32.h;
+
   static double mdSpace = 24.h;
+  static double spaceBtwItems = 16.h;
+  static double spaceBtwItemsRowItems = 12.w;
 }

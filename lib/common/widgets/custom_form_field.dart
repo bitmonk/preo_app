@@ -36,23 +36,23 @@ class _FormInputFieldState extends State<FormInputField> {
               style: TextStyle(fontSize: Sizes.subTitle, color: Colors.black),
               decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 22.h),
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 20 .h),
                   filled: true,
                   fillColor: AppColors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.r),
                     borderSide:
-                        BorderSide(color: AppColors.neutral400, width: 2.0),
+                        BorderSide(color: AppColors.neutral400, width: 1.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.r),
                     borderSide:
-                        BorderSide(color: AppColors.neutral400, width: 2.0),
+                        BorderSide(color: AppColors.neutral400, width: 1.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.r),
                     borderSide:
-                        BorderSide(color: AppColors.neutral400, width: 2.0),
+                        BorderSide(color: AppColors.neutral400, width: 1.0),
                   )),
             ),
             AnimatedPositioned(

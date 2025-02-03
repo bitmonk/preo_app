@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:preo/common/widgets/custom_form_field.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
@@ -7,6 +8,7 @@ import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/device/device_utils.dart';
+import 'package:preo/utils/routes/routes.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -16,8 +18,26 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final TextEditingController _dobController = TextEditingController();
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (selectedDate != null && selectedDate != DateTime.now()) {
+      setState(() {
+        _dobController.text = '${selectedDate.toLocal()}'.split(' ')[0];
+        print(_dobController.text);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     return GestureDetector(
       onTap: () => DeviceUtils.hideKeyboard(context),
       child: Scaffold(
@@ -76,48 +96,100 @@ class _SignupState extends State<Signup> {
                                 labelText: 'Confirm Password',
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
+                              GestureDetector(
+                                onTap: () => _selectDate(context),
+                                child: AbsorbPointer(
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      // // final error =
+                                      // //     ValidationBuilder().build()(value);
+                                      // // setState(() {
+                                      // //   _isDobValid = error == null;
+                                      // // });
+                                      // return error;
+                                    },
+                                    controller: _dobController,
+                                    decoration: InputDecoration(
+                                      labelText: 'Date of Birth',
+                                      labelStyle: TextStyle(
+                                        color: AppColors.formTextColor,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                        borderSide:
+                                            BorderSide(color: Colors.red),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1,
+                                            color: AppColors.neutral400),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 24.w,
+                                        vertical: 18.h,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: Sizes.spaceBtwItems),
                             ],
                           )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButton(
-                            btnText: 'Continue',
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(
-                          height: Sizes.mdSpace,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppColors.titleColor),
-                              children: const <TextSpan>[
-                                TextSpan(
-                                  text: 'Do you have account? ',
-                                ),
-                                TextSpan(
-                                  text: 'Sign In',
-                                  style: TextStyle(color: AppColors.primary),
-                                ),
-                              ],
+                  if (!keyboardVisible)
+                    SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: PrimaryButton(
+                              btnText: 'Continue',
+                              onPressed: () {
+                                Get.toNamed(Routes.getLoginRoute());
+                              },
                             ),
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: Sizes.mdSpace,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: GestureDetector(
+                              onTap: () => Get.toNamed(Routes.getLoginRoute()),
+                              child: RichText(
+                                text: TextSpan(
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: AppColors.titleColor),
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: 'Do you have account? ',
+                                    ),
+                                    TextSpan(
+                                      text: 'Sign In',
+                                      style:
+                                          TextStyle(color: AppColors.primary),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),

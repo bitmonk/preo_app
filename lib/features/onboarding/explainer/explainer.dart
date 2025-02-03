@@ -14,7 +14,7 @@ class Explainer extends StatelessWidget {
   const Explainer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     final controller = Get.put(OnboardingController());
 
     return Scaffold(

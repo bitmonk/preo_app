@@ -5,6 +5,10 @@ class AppColors {
   static const Color primary100 = Color(0xFFF8D8D6);
   static const Color primary400 = Color(0xFFE16259);
   static const Color neutral400 = Color(0xFF9FA9B3);
+  static const Color neutral500 = Color(0xFF8793A0);
+  static const Color neutral600 = Color(0xFF8793A0);
+  static const Color neutral700 = Color(0xFF3E5267);
+  static const Color neutral800 = Color(0xFF56687A);
 
   static const Color secondary = Color(0xFFDA3B30);
   static const Color bgColor = Color(0xFFFBF8F8);
