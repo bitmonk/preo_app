@@ -100,6 +100,14 @@ class _SignupState extends State<Signup> {
                                 () => AppTextFormField(
                                   labelText: 'Password',
                                   obscureText: authController.password.value,
+                                  validator: (password) {
+                                    // Trigger password validation in real-time
+                                    authController.checkPassword(password!);
+                                    return null;
+                                  },
+                                  onChanged: (password) {
+                                    authController.checkPassword(password);
+                                  },
                                   suffixIcon: IconButton(
                                     icon: SizedBox(
                                       height: 24.h,
@@ -114,6 +122,34 @@ class _SignupState extends State<Signup> {
                                       authController.seePassword();
                                     },
                                   ),
+                                ),
+                              ),
+                              Obx(
+                                () => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 4.h),
+                                    _buildValidationMessage(
+                                      'At least 8 characters long',
+                                      authController.hasMinLength.value,
+                                    ),
+                                    _buildValidationMessage(
+                                      'Contain at least one uppercase letter',
+                                      authController.hasUpperCase.value,
+                                    ),
+                                    _buildValidationMessage(
+                                      'Contain at least one lowercase letter',
+                                      authController.hasLowerCase.value,
+                                    ),
+                                    _buildValidationMessage(
+                                      'Contain at least one number',
+                                      authController.hasNumber.value,
+                                    ),
+                                    _buildValidationMessage(
+                                      'Contain at least one special character (!@#\$%^&*)',
+                                      authController.hasSpecialCharacter.value,
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
@@ -217,15 +253,25 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
-}
 
-extension CustomValidationBuilder on ValidationBuilder {
-  password() => add((value) {
-        if (value == 'password') {
-          return 'Password should not "password"';
-        }
-        return null;
-      });
+  Widget _buildValidationMessage(String message, bool isValid) {
+    // if (isValid) return SizedBox.shrink();
+    return Row(
+      children: [
+        Icon(
+          isValid ? Icons.check_circle : Icons.error,
+          color: isValid ? AppColors.primary : AppColors.error500,
+          size: 16,
+        ),
+        SizedBox(width: 8),
+        Text(
+          message,
+          style: TextStyle(
+            fontSize: 12.sp,
+            color: isValid ? AppColors.primary : AppColors.error500,
+          ),
+        ),
+      ],
+    );
+  }
 }
-
-final validator = ValidationBuilder().password().build();
