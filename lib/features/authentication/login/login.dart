@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:preo/common/widgets/custom_form_field.dart';
+import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
@@ -61,11 +61,11 @@ class _LoginState extends State<Login> {
                           ),
                           Column(
                             children: [
-                              FormInputField(
+                              AppTextFormField(
                                 labelText: 'Email Address',
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
-                              FormInputField(
+                              AppTextFormField(
                                 labelText: 'Password',
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
@@ -138,7 +138,7 @@ class _LoginState extends State<Login> {
                             height: Sizes.mdSpace,
                           ),
                           GestureDetector(
-                            onTap: () => Get.back(),
+                            onTap: () => Get.toNamed(Routes.getSignupRoute()),
                             child: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: RichText(

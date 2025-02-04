@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:preo/common/widgets/custom_form_field.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/routes/routes.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class PassChangedNofify extends StatefulWidget {
   const PassChangedNofify({super.key});

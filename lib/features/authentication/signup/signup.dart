@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:preo/common/widgets/custom_form_field.dart';
+import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
+import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -30,21 +33,23 @@ class _SignupState extends State<Signup> {
     if (selectedDate != null && selectedDate != DateTime.now()) {
       setState(() {
         _dobController.text = '${selectedDate.toLocal()}'.split(' ')[0];
-        print(_dobController.text);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     return GestureDetector(
       onTap: () => DeviceUtils.hideKeyboard(context),
       child: Scaffold(
         appBar: AppBar(
-          surfaceTintColor: AppColors.bgColor,
-          title: AppStepper(index: 0),
-        ),
+            backgroundColor: AppColors.bgColor,
+            surfaceTintColor: AppColors.bgColor,
+            title: AppStepper(index: 0),
+            // scrolledUnderElevation: 0,
+            automaticallyImplyLeading: false),
         body: SafeArea(
           child: Container(
             color: AppColors.bgColor,
@@ -80,61 +85,75 @@ class _SignupState extends State<Signup> {
                           ),
                           Column(
                             children: [
-                              FormInputField(
-                                labelText: 'Name',
-                              ),
                               SizedBox(height: Sizes.spaceBtwItems),
-                              FormInputField(
+                              AppTextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 labelText: 'Email Address',
+                                validator: ValidationBuilder()
+                                    .email()
+                                    .maxLength(50)
+                                    .build(),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
-                              FormInputField(
-                                labelText: 'Password',
+                              Obx(
+                                () => AppTextFormField(
+                                  labelText: 'Password',
+                                  obscureText: authController.password.value,
+                                  suffixIcon: IconButton(
+                                    icon: SizedBox(
+                                      height: 24.h,
+                                      width: 24.w,
+                                      child: SvgPicture.asset(
+                                        authController.password.value
+                                            ? Images.eyeSlashIcon
+                                            : Images.eyeIcon,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      authController.seePassword();
+                                    },
+                                  ),
+                                ),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
-                              FormInputField(
-                                labelText: 'Confirm Password',
+                              Obx(
+                                () => AppTextFormField(
+                                  labelText: 'Confirm Password',
+                                  obscureText:
+                                      authController.confirmPassword.value,
+                                  suffixIcon: IconButton(
+                                    icon: SizedBox(
+                                      height: 24.h,
+                                      width: 24.w,
+                                      child: SvgPicture.asset(
+                                        authController.confirmPassword.value
+                                            ? Images.eyeSlashIcon
+                                            : Images.eyeIcon,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      authController.seeConfirmPassword();
+                                    },
+                                  ),
+                                ),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
                               GestureDetector(
                                 onTap: () => _selectDate(context),
                                 child: AbsorbPointer(
-                                  child: TextFormField(
-                                    validator: (value) {
-                                      // // final error =
-                                      // //     ValidationBuilder().build()(value);
-                                      // // setState(() {
-                                      // //   _isDobValid = error == null;
-                                      // // });
-                                      // return error;
-                                    },
+                                  child: AppTextFormField(
                                     controller: _dobController,
-                                    decoration: InputDecoration(
-                                      labelText: 'Date of Birth',
-                                      labelStyle: TextStyle(
-                                        color: AppColors.formTextColor,
+                                    labelText: 'Date',
+                                    isReadOnly: true,
+                                    suffixIcon: IconButton(
+                                      icon: SizedBox(
+                                        height: 24.h,
+                                        width: 24.w,
+                                        child:
+                                            SvgPicture.asset(Images.calendar),
                                       ),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.r),
-                                        borderSide:
-                                            BorderSide(color: Colors.red),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1,
-                                            color: AppColors.neutral400),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 24.w,
-                                        vertical: 18.h,
-                                      ),
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ),
@@ -157,7 +176,7 @@ class _SignupState extends State<Signup> {
                             child: PrimaryButton(
                               btnText: 'Continue',
                               onPressed: () {
-                                Get.toNamed(Routes.getLoginRoute());
+                                // Get.toNamed(Routes.getLoginRoute());
                               },
                             ),
                           ),
@@ -199,3 +218,14 @@ class _SignupState extends State<Signup> {
     );
   }
 }
+
+extension CustomValidationBuilder on ValidationBuilder {
+  password() => add((value) {
+        if (value == 'password') {
+          return 'Password should not "password"';
+        }
+        return null;
+      });
+}
+
+final validator = ValidationBuilder().password().build();

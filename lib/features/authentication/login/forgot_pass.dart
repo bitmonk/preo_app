@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:preo/common/widgets/custom_form_field.dart';
+import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
-import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/routes/routes.dart';
@@ -82,7 +81,7 @@ class _ForgotPassState extends State<ForgotPass> {
                             style: TextStyle(color: AppColors.neutral700),
                           ),
                           SizedBox(height: Sizes.defaultSpace),
-                          FormInputField(
+                          AppTextFormField(
                             labelText: 'Email Address',
                           ),
                           SizedBox(height: Sizes.spaceBtwItems),

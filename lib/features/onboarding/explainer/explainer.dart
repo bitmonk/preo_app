@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:preo/utils/constants/colors.dart';
-import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/device/device_utils.dart';
 import 'package:preo/utils/helpers/helper_functions.dart';
@@ -14,7 +13,7 @@ class Explainer extends StatelessWidget {
   const Explainer({super.key});
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     final controller = Get.put(OnboardingController());
 
     return Scaffold(

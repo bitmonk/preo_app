@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-import 'package:preo/common/widgets/custom_form_field.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -19,7 +18,6 @@ class EmailVerification extends StatefulWidget {
 
 class _EmailVerificationState extends State<EmailVerification> {
   bool isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,49 +63,47 @@ class _EmailVerificationState extends State<EmailVerification> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      DeviceUtils.getScreenWidth(context) * 0.7,
-                                  child: Text(
-                                    'Please check your email',
-                                    style: TextStyle(
-                                      fontSize: Sizes.heading,
-                                      fontWeight: Sizes.font6,
-                                      color: AppColors.titleColor,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width:
+                                    DeviceUtils.getScreenWidth(context) * 0.7,
+                                child: Text(
+                                  'Please check your email',
+                                  style: TextStyle(
+                                    fontSize: Sizes.heading,
+                                    fontWeight: Sizes.font6,
+                                    color: AppColors.titleColor,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Sizes.largeSpace,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: AppColors.titleColor),
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: 'We’ve sent a code to ',
                                     ),
-                                  ),
+                                    TextSpan(
+                                      text: 'helloworld@gmail.com',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: Sizes.largeSpace,
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: AppColors.titleColor),
-                                    children: const <TextSpan>[
-                                      TextSpan(
-                                        text: 'We’ve sent a code to ',
-                                      ),
-                                      TextSpan(
-                                        text: 'helloworld@gmail.com',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: Sizes.defaultSpace),
-                                CustomVerificationInput(),
-                                SizedBox(height: Sizes.spaceBtwItems),
-                              ],
-                            ),
+                              ),
+                              SizedBox(height: Sizes.defaultSpace),
+                              CustomVerificationInput(),
+                              SizedBox(height: Sizes.spaceBtwItems),
+                            ],
                           ),
                         ),
                       ),

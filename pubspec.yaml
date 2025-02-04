@@ -32,6 +32,9 @@ flutter:
     - assets/images/explainer/
     - assets/logos/
     - assets/images/splash/
+    - assets/icons/eye.svg
+    - assets/icons/eye_slash.svg
+    - assets/icons/calendar.svg
 
   fonts:
     - family: Inter
