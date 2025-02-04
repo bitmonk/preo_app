@@ -130,23 +130,19 @@ class _SignupState extends State<Signup> {
                                   children: [
                                     SizedBox(height: 4.h),
                                     _buildValidationMessage(
-                                      'At least 8 characters long',
+                                      'Must be at least 8 characters',
                                       authController.hasMinLength.value,
                                     ),
                                     _buildValidationMessage(
-                                      'Contain at least one uppercase letter',
+                                      'Can not include your name or eamil address',
                                       authController.hasUpperCase.value,
                                     ),
                                     _buildValidationMessage(
-                                      'Contain at least one lowercase letter',
+                                      'Must have at least one symbol or number',
                                       authController.hasLowerCase.value,
                                     ),
                                     _buildValidationMessage(
-                                      'Contain at least one number',
-                                      authController.hasNumber.value,
-                                    ),
-                                    _buildValidationMessage(
-                                      'Contain at least one special character (!@#\$%^&*)',
+                                      'Can not contain spaces',
                                       authController.hasSpecialCharacter.value,
                                     ),
                                   ],
@@ -259,8 +255,8 @@ class _SignupState extends State<Signup> {
     return Row(
       children: [
         Icon(
-          isValid ? Icons.check_circle : Icons.error,
-          color: isValid ? AppColors.primary : AppColors.error500,
+          isValid ? Icons.check : Icons.close,
+          color: AppColors.neutral900,
           size: 16,
         ),
         SizedBox(width: 8),
@@ -268,7 +264,7 @@ class _SignupState extends State<Signup> {
           message,
           style: TextStyle(
             fontSize: 12.sp,
-            color: isValid ? AppColors.primary : AppColors.error500,
+            color: AppColors.neutral900,
           ),
         ),
       ],
