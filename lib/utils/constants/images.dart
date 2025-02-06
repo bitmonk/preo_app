@@ -13,4 +13,7 @@ class Images {
   static const String eyeIcon = 'assets/icons/eye.svg';
   static const String eyeSlashIcon = 'assets/icons/eye_slash.svg';
   static const String calendar = 'assets/icons/calendar.svg';
+
+  //Team Logos ->
+  static const String vikings = 'assets/images/teams/vikings.png';
 }

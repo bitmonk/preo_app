@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
+import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -21,6 +23,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return GestureDetector(
@@ -63,10 +66,39 @@ class _LoginState extends State<Login> {
                             children: [
                               AppTextFormField(
                                 labelText: 'Email Address',
+                                controller:
+                                    authController.emailController.value,
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
-                              AppTextFormField(
-                                labelText: 'Password',
+                              Obx(
+                                () => AppTextFormField(
+                                  labelText: 'Password',
+                                  obscureText: authController.password.value,
+                                  controller:
+                                      authController.passController.value,
+                                  // validator: (password) {
+                                  //   // Trigger password validation in real-time
+                                  //   authController.checkPassword(password!);
+                                  //   return null;
+                                  // },
+                                  // onChanged: (password) {
+                                  //   authController.checkPassword(password);
+                                  // },
+                                  suffixIcon: IconButton(
+                                    icon: SizedBox(
+                                      height: 24.h,
+                                      width: 24.w,
+                                      child: SvgPicture.asset(
+                                        authController.password.value
+                                            ? Images.eyeSlashIcon
+                                            : Images.eyeIcon,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      authController.seePassword();
+                                    },
+                                  ),
+                                ),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
                               Row(
@@ -131,7 +163,9 @@ class _LoginState extends State<Login> {
                             width: double.infinity,
                             child: PrimaryButton(
                               btnText: 'Login',
-                              onPressed: () {},
+                              onPressed: () {
+                                authController.loginApi();
+                              },
                             ),
                           ),
                           SizedBox(

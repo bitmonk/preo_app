@@ -7,6 +7,7 @@ import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
+import 'package:preo/features/authentication/signup/choose_team.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -42,7 +43,9 @@ class _SignupState extends State<Signup> {
     AuthController authController = Get.put(AuthController());
     final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     return GestureDetector(
-      onTap: () => DeviceUtils.hideKeyboard(context),
+      onTap: () {
+        DeviceUtils.hideKeyboard(context);
+      },
       child: Scaffold(
         appBar: AppBar(
             backgroundColor: AppColors.bgColor,
@@ -92,7 +95,7 @@ class _SignupState extends State<Signup> {
                                 labelText: 'Email Address',
                                 validator: ValidationBuilder()
                                     .email()
-                                    .maxLength(50)
+                                    .maxLength(5)
                                     .build(),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
@@ -125,28 +128,32 @@ class _SignupState extends State<Signup> {
                                 ),
                               ),
                               Obx(
-                                () => Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: 4.h),
-                                    _buildValidationMessage(
-                                      'Must be at least 8 characters',
-                                      authController.hasMinLength.value,
-                                    ),
-                                    _buildValidationMessage(
-                                      'Can not include your name or eamil address',
-                                      authController.hasUpperCase.value,
-                                    ),
-                                    _buildValidationMessage(
-                                      'Must have at least one symbol or number',
-                                      authController.hasLowerCase.value,
-                                    ),
-                                    _buildValidationMessage(
-                                      'Can not contain spaces',
-                                      authController.hasSpecialCharacter.value,
-                                    ),
-                                  ],
-                                ),
+                                () => authController.hasStartedTyping.value
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(height: 4.h),
+                                          _buildValidationMessage(
+                                            'Must be at least 8 characters',
+                                            authController.hasMinLength.value,
+                                          ),
+                                          _buildValidationMessage(
+                                            'Can not include your name or eamil address',
+                                            authController.hasUpperCase.value,
+                                          ),
+                                          _buildValidationMessage(
+                                            'Must have at least one symbol or number',
+                                            authController.hasLowerCase.value,
+                                          ),
+                                          _buildValidationMessage(
+                                            'Can not contain spaces',
+                                            authController
+                                                .hasSpecialCharacter.value,
+                                          ),
+                                        ],
+                                      )
+                                    : SizedBox.shrink(),
                               ),
                               SizedBox(height: Sizes.spaceBtwItems),
                               Obx(
@@ -208,7 +215,7 @@ class _SignupState extends State<Signup> {
                             child: PrimaryButton(
                               btnText: 'Continue',
                               onPressed: () {
-                                // Get.toNamed(Routes.getLoginRoute());
+                                Get.to(() => ChooseTeam());
                               },
                             ),
                           ),
