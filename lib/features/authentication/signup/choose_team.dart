@@ -7,6 +7,7 @@ import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
+import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
@@ -23,11 +24,24 @@ class ChooseTeam extends StatefulWidget {
 class _ChooseTeamState extends State<ChooseTeam> {
   @override
   Widget build(BuildContext context) {
-    List teamList = [
-      ['Vikings Rugby', true],
-      ['Western Rugby', false],
-      ['Melbourne', false],
+    final List<Map<String, String>> teams = [
+      {
+        'title': 'Vikings Rugby',
+        'logoImage': Assets.images.teams.vikings.path,
+        'subtitle': 'Cheer for the Vikings and conquer the field!',
+      },
+      {
+        'title': 'Western Rugby',
+        'logoImage': Assets.images.teams.western.path,
+        'subtitle': 'Join Western Rugby for an unforgettable season!',
+      },
+      {
+        'title': 'Melbourne',
+        'logoImage': Assets.images.teams.melbourne.path,
+        'subtitle': 'Support Melbourne and witness greatness!',
+      },
     ];
+
     AuthController authController = Get.put(AuthController());
     // final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     bool isChecked = false;
@@ -76,11 +90,32 @@ class _ChooseTeamState extends State<ChooseTeam> {
                         SizedBox(height: Sizes.spaceBtwItems),
                         Column(
                           children: [
-                            TeamSelectionList(authController: authController),
-                            SizedBox(height: Sizes.spaceBtwItems),
-                            TeamSelectionList(authController: authController),
-                            SizedBox(height: Sizes.spaceBtwItems),
-                            TeamSelectionList(authController: authController),
+                            SizedBox(
+                              height: 300
+                                  .h, // Adjust height to prevent unbounded error
+                              child: ListView.builder(
+                                itemCount: teams.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: Sizes.spaceBtwItems),
+                                    child: Obx(
+                                      () => TeamSelectionList(
+                                        authController: authController,
+                                        title: teams[index]['title']!,
+                                        logoImage: teams[index]['logoImage']!,
+                                        subtitle: teams[index]['subtitle']!,
+                                        isSelected: authController
+                                                .selectedTeamIndex.value ==
+                                            index,
+                                        onTap: () => authController
+                                            .selectSingleTeam(index),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                             SizedBox(height: Sizes.spaceBtwItems),
                           ],
                         ),
@@ -143,31 +178,39 @@ class TeamSelectionList extends StatelessWidget {
   const TeamSelectionList({
     super.key,
     required this.authController,
+    required this.title,
+    required this.logoImage,
+    required this.subtitle,
+    required this.isSelected,
+    required this.onTap,
   });
 
   final AuthController authController;
+  final String title;
+  final String logoImage;
+  final String subtitle;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => authController.selectTeam(),
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.sp),
         ),
         child: ListTile(
-          leading: Image.asset(
-            'assets/images/teams/vikings.png',
-          ),
+          leading: Image.asset(logoImage),
           title: Text(
-            'Vikings Rugby',
+            title,
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Text('Cheer for the Vikings and ...'),
+          subtitle: Text(subtitle),
           trailing: Obx(
             () => Container(
               height: 24,
@@ -179,7 +222,7 @@ class TeamSelectionList extends StatelessWidget {
                     : Colors.transparent,
                 border: Border.all(color: AppColors.primary, width: 2),
               ),
-              child: authController.teamSelected.value
+              child: isSelected
                   ? Icon(
                       Icons.check,
                       color: Colors.white,

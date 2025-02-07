@@ -11,6 +11,7 @@ class AuthController extends GetxController {
 
   Rx<bool> password = true.obs;
   Rx<bool> confirmPassword = true.obs;
+  var selectedTeamIndex = (-1).obs;
 
   // Validation state for password
   RxBool hasMinLength = false.obs;
@@ -20,7 +21,6 @@ class AuthController extends GetxController {
   RxBool hasSpecialCharacter = false.obs;
   RxBool isPasswordValid = false.obs;
   RxBool hasStartedTyping = false.obs;
-  RxBool teamSelected = false.obs;
 
   seePassword() {
     password.value = !password.value;
@@ -47,10 +47,6 @@ class AuthController extends GetxController {
         hasSpecialCharacter.value;
   }
 
-  void selectTeam() {
-    teamSelected.value = !teamSelected.value;
-  }
-
   void loginApi() async {
     try {
       var response =
@@ -68,6 +64,14 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Error', e.toString());
+    }
+  }
+
+  void selectSingleTeam(int index) {
+    if (selectedTeamIndex.value == index) {
+      selectedTeamIndex.value = -1; // Unselect if already selected
+    } else {
+      selectedTeamIndex.value = index;
     }
   }
 }
