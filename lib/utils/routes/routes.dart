@@ -4,6 +4,7 @@ import 'package:preo/features/authentication/login/enter_new_pass.dart';
 import 'package:preo/features/authentication/login/forgot_pass.dart';
 import 'package:preo/features/authentication/login/login.dart';
 import 'package:preo/features/authentication/login/pass_changed_nofify.dart';
+import 'package:preo/features/authentication/signup/current_club.dart';
 import 'package:preo/features/authentication/signup/signup.dart';
 import 'package:preo/features/onboarding/explainer/explainer.dart';
 import 'package:preo/features/onboarding/splash/splash_screen.dart';
@@ -17,6 +18,7 @@ class Routes {
   static String emailVerify = '/emailVerify';
   static String enterNewPass = '/enterNewPass';
   static String passChangedNotify = '/passChangedNotify';
+  static String currentClub = '/currentClub';
   static String getSplashRoute() => splash;
   static String getExplainerRoute() => explainer;
   static String getSignupRoute() => signup;
@@ -25,6 +27,7 @@ class Routes {
   static String getEmailVerifyRoute() => emailVerify;
   static String getEnterNewPassRoute() => enterNewPass;
   static String getPassChangedNotifyRoute() => passChangedNotify;
+  static String getCurrentClub() => currentClub;
   static List<GetPage> routes = [
     GetPage(
       name: splash,
@@ -57,6 +60,10 @@ class Routes {
     GetPage(
       name: passChangedNotify,
       page: () => PassChangedNofify(),
+    ),
+    GetPage(
+      name: currentClub,
+      page: () => CurrentClub(),
     ),
   ];
 }

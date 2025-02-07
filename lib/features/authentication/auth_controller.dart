@@ -22,6 +22,9 @@ class AuthController extends GetxController {
   RxBool isPasswordValid = false.obs;
   RxBool hasStartedTyping = false.obs;
 
+  // Current Club Confirmation
+  RxBool selectedValue = false.obs;
+
   seePassword() {
     password.value = !password.value;
   }
@@ -55,7 +58,6 @@ class AuthController extends GetxController {
         'password': passController.value.text,
       });
       var data = jsonDecode(response.body);
-      print(data);
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'success');
         Get.off(() => HomePage());
@@ -73,5 +75,9 @@ class AuthController extends GetxController {
     } else {
       selectedTeamIndex.value = index;
     }
+  }
+
+  void switchYesNoCheckbox(bool value) {
+    selectedValue.value = value; // Directly set the value
   }
 }

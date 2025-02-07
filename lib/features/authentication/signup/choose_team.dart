@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_validator/form_validator.dart';
-import 'package:get/get.dart';
-import 'package:preo/common/widgets/app_text_formfield.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
-import 'package:preo/utils/constants/images.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/device/device_utils.dart';
+import 'package:get/get.dart';
 import 'package:preo/utils/routes/routes.dart';
 
 class ChooseTeam extends StatefulWidget {
@@ -40,11 +36,24 @@ class _ChooseTeamState extends State<ChooseTeam> {
         'logoImage': Assets.images.teams.melbourne.path,
         'subtitle': 'Support Melbourne and witness greatness!',
       },
+      {
+        'title': 'Vikings Rugby',
+        'logoImage': Assets.images.teams.vikings.path,
+        'subtitle': 'Cheer for the Vikings and conquer the field!',
+      },
+      {
+        'title': 'Western Rugby',
+        'logoImage': Assets.images.teams.western.path,
+        'subtitle': 'Join Western Rugby for an unforgettable season!',
+      },
+      {
+        'title': 'Melbourne',
+        'logoImage': Assets.images.teams.melbourne.path,
+        'subtitle': 'Support Melbourne and witness greatness!',
+      },
     ];
 
     AuthController authController = Get.put(AuthController());
-    // final bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
-    bool isChecked = false;
 
     return GestureDetector(
       onTap: () {
@@ -60,13 +69,13 @@ class _ChooseTeamState extends State<ChooseTeam> {
         body: SafeArea(
           child: Container(
             color: AppColors.bgColor,
-            child: Padding(
-              padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 34.h),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
                         SizedBox(height: Sizes.mdSpace),
                         Text(
@@ -89,83 +98,69 @@ class _ChooseTeamState extends State<ChooseTeam> {
                         ),
                         SizedBox(height: Sizes.spaceBtwItems),
                         Column(
-                          children: [
-                            SizedBox(
-                              height: 300
-                                  .h, // Adjust height to prevent unbounded error
-                              child: ListView.builder(
-                                itemCount: teams.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                        bottom: Sizes.spaceBtwItems),
-                                    child: Obx(
-                                      () => TeamSelectionList(
-                                        authController: authController,
-                                        title: teams[index]['title']!,
-                                        logoImage: teams[index]['logoImage']!,
-                                        subtitle: teams[index]['subtitle']!,
-                                        isSelected: authController
-                                                .selectedTeamIndex.value ==
-                                            index,
-                                        onTap: () => authController
-                                            .selectSingleTeam(index),
-                                      ),
-                                    ),
-                                  );
-                                },
+                          children: teams.map((team) {
+                            int index = teams.indexOf(team);
+                            return Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: Sizes.spaceBtwItems),
+                              child: Obx(
+                                () => TeamSelectionList(
+                                  authController: authController,
+                                  title: team['title']!,
+                                  logoImage: team['logoImage']!,
+                                  subtitle: team['subtitle']!,
+                                  isSelected:
+                                      authController.selectedTeamIndex.value ==
+                                          index,
+                                  onTap: () =>
+                                      authController.selectSingleTeam(index),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: Sizes.spaceBtwItems),
-                          ],
+                            );
+                          }).toList(),
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     SizedBox(
                       width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: PrimaryButton(
-                              btnText: 'Continue',
-                              onPressed: () {
-                                // Get.toNamed(Routes.getLoginRoute());
-                              },
+                      child: PrimaryButton(
+                        btnText: 'Continue',
+                        onPressed: () {
+                          Get.toNamed(Routes.getCurrentClub());
+                        },
+                      ),
+                    ),
+                    SizedBox(height: Sizes.mdSpace),
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.getLoginRoute()),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.w),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.titleColor,
                             ),
-                          ),
-                          SizedBox(height: Sizes.mdSpace),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: GestureDetector(
-                              onTap: () => Get.toNamed(Routes.getLoginRoute()),
-                              child: RichText(
-                                text: TextSpan(
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: AppColors.titleColor,
-                                  ),
-                                  children: const <TextSpan>[
-                                    TextSpan(
-                                      text: 'Do you have account? ',
-                                    ),
-                                    TextSpan(
-                                      text: 'Sign In',
-                                      style:
-                                          TextStyle(color: AppColors.primary),
-                                    ),
-                                  ],
-                                ),
+                            children: const <TextSpan>[
+                              TextSpan(text: 'Do you have an account? '),
+                              TextSpan(
+                                text: 'Sign In',
+                                style: TextStyle(color: AppColors.primary),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
+                SizedBox(height: 20.h), // Adds space at the bottom
+              ],
             ),
           ),
         ),
@@ -211,25 +206,21 @@ class TeamSelectionList extends StatelessWidget {
             ),
           ),
           subtitle: Text(subtitle),
-          trailing: Obx(
-            () => Container(
-              height: 24,
-              width: 24,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: authController.teamSelected.value
-                    ? AppColors.primary
-                    : Colors.transparent,
-                border: Border.all(color: AppColors.primary, width: 2),
-              ),
-              child: isSelected
-                  ? Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 14,
-                    )
-                  : null,
+          trailing: Container(
+            height: 24,
+            width: 24,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isSelected ? AppColors.primary : Colors.transparent,
+              border: Border.all(color: AppColors.primary, width: 2),
             ),
+            child: isSelected
+                ? Icon(
+                    Icons.check,
+                    color: Colors.white,
+                    size: 14,
+                  )
+                : null,
           ),
         ),
       ),
