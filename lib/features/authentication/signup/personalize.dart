@@ -165,7 +165,7 @@ class _PersonalizePageState extends State<PersonalizePage> {
                             ],
                           ),
                           Transform.scale(
-                            scale: 1, // Keep the overall switch size unchanged
+                            scale: 1,
                             child: Obx(
                               () => Switch(
                                 inactiveThumbColor: AppColors.white,
@@ -179,8 +179,8 @@ class _PersonalizePageState extends State<PersonalizePage> {
                                     WidgetStateProperty.resolveWith<Icon?>(
                                   (states) {
                                     return Icon(
-                                      Icons.circle, // Custom icon for thumb
-                                      size: 24, // Increase the thumb size
+                                      Icons.circle,
+                                      size: 24,
                                       color: AppColors.white,
                                     );
                                   },

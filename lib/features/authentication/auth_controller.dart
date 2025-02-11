@@ -17,6 +17,8 @@ class AuthController extends GetxController {
   Rx<bool> acceptedTC = false.obs;
   Rx<File?> profileImage = Rx<File?>(null);
   var selectedTeamIndex = (-1).obs;
+  var selectedTeamLogo = ''.obs;
+  var selectedTeamName = ''.obs;
 
   // Validation state for password
   RxBool hasMinLength = false.obs;
@@ -74,11 +76,16 @@ class AuthController extends GetxController {
     }
   }
 
-  void selectSingleTeam(int index) {
+  // Update this method to save the team logo and name along with the index
+  void selectSingleTeam(int index, String logo, String name) {
     if (selectedTeamIndex.value == index) {
       selectedTeamIndex.value = -1;
+      selectedTeamLogo.value = ''; // Reset logo
+      selectedTeamName.value = ''; // Reset name
     } else {
       selectedTeamIndex.value = index;
+      selectedTeamLogo.value = logo;
+      selectedTeamName.value = name;
     }
   }
 

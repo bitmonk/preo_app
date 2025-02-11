@@ -118,15 +118,16 @@ class ProfileOverviewState extends State<ProfileOverview> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                  height: 46.h,
-                                  width: 35.w,
-                                  child: Image.asset(
-                                      Assets.images.teams.vikings.path)),
+                                height: 46.h,
+                                width: 35.w,
+                                child: Image.asset(
+                                    authController.selectedTeamLogo.value),
+                              ),
                               SizedBox(
                                 width: 8.w,
                               ),
                               Text(
-                                'Vikings Rugby',
+                                authController.selectedTeamName.value,
                                 style: TextStyle(
                                   fontSize: Sizes.subTitle,
                                   color: AppColors.neutral900,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
+import 'package:preo/data/team_data.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
@@ -20,39 +21,7 @@ class ChooseTeam extends StatefulWidget {
 class _ChooseTeamState extends State<ChooseTeam> {
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> teams = [
-      {
-        'title': 'Vikings Rugby',
-        'logoImage': Assets.images.teams.vikings.path,
-        'subtitle': 'Cheer for the Vikings and conquer the field!',
-      },
-      {
-        'title': 'Western Rugby',
-        'logoImage': Assets.images.teams.western.path,
-        'subtitle': 'Join Western Rugby for an unforgettable season!',
-      },
-      {
-        'title': 'Melbourne',
-        'logoImage': Assets.images.teams.melbourne.path,
-        'subtitle': 'Support Melbourne and witness greatness!',
-      },
-      {
-        'title': 'Vikings Rugby',
-        'logoImage': Assets.images.teams.vikings.path,
-        'subtitle': 'Cheer for the Vikings and conquer the field!',
-      },
-      {
-        'title': 'Western Rugby',
-        'logoImage': Assets.images.teams.western.path,
-        'subtitle': 'Join Western Rugby for an unforgettable season!',
-      },
-      {
-        'title': 'Melbourne',
-        'logoImage': Assets.images.teams.melbourne.path,
-        'subtitle': 'Support Melbourne and witness greatness!',
-      },
-    ];
-
+    final teamData = TeamData();
     AuthController authController = Get.put(AuthController());
 
     return GestureDetector(
@@ -98,8 +67,8 @@ class _ChooseTeamState extends State<ChooseTeam> {
                         ),
                         SizedBox(height: Sizes.spaceBtwItems),
                         Column(
-                          children: teams.map((team) {
-                            int index = teams.indexOf(team);
+                          children: teamData.teams.map((team) {
+                            int index = teamData.teams.indexOf(team);
                             return Padding(
                               padding:
                                   EdgeInsets.only(bottom: Sizes.spaceBtwItems),
@@ -112,8 +81,11 @@ class _ChooseTeamState extends State<ChooseTeam> {
                                   isSelected:
                                       authController.selectedTeamIndex.value ==
                                           index,
-                                  onTap: () =>
-                                      authController.selectSingleTeam(index),
+                                  onTap: () => authController.selectSingleTeam(
+                                    index,
+                                    team['logoImage']!,
+                                    team['title']!,
+                                  ),
                                 ),
                               ),
                             );
