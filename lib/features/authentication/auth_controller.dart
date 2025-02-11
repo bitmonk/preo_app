@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:preo/features/Home/dashboard.dart';
 import 'package:preo/utils/routes/routes.dart';
 
@@ -12,6 +14,7 @@ class AuthController extends GetxController {
 
   Rx<bool> password = true.obs;
   Rx<bool> confirmPassword = true.obs;
+  Rx<File?> profileImage = Rx<File?>(null);
   var selectedTeamIndex = (-1).obs;
 
   // Validation state for password
@@ -84,5 +87,17 @@ class AuthController extends GetxController {
 
   void selectTeam(int index) {
     selectedTeamIndex.value = index;
+  }
+
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage =
+        await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      profileImage.value = File(pickedImage.path);
+    } else {
+      profileImage.value = null;
+    }
   }
 }

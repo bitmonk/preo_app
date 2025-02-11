@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
+import 'package:preo/features/Home/dashboard.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
@@ -136,8 +137,8 @@ class ProfileOverviewState extends State<ProfileOverview> {
                       child: PrimaryButton(
                         btnText: 'Continue',
                         onPressed: () {
-                          Get.to(() => Routes.getDashboard(),
-                              transition: Transition.leftToRightWithFade);
+                          Get.to(() => Dashboard(),
+                              transition: Transition.rightToLeftWithFade);
                         },
                       ),
                     ),

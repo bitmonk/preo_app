@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
@@ -19,7 +22,7 @@ class PersonalizePage extends StatefulWidget {
 class _PersonalizePageState extends State<PersonalizePage> {
   @override
   Widget build(BuildContext context) {
-    // AuthController authController = Get.put(AuthController());
+    AuthController authController = Get.put(AuthController());
     final List<Color> colors = [
       AppColors.primary,
       AppColors.neutral800,
@@ -29,7 +32,6 @@ class _PersonalizePageState extends State<PersonalizePage> {
       AppColors.secondary100,
       AppColors.black,
     ];
-
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
@@ -63,18 +65,30 @@ class _PersonalizePageState extends State<PersonalizePage> {
                       SizedBox(height: Sizes.spaceBtwItems),
                       InkWell(
                         onTap: () {
-                          print('tapped');
+                          authController.pickImage();
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            // color: Colors.black,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           height: 98.h,
                           width: 98.h,
-                          child: Image.asset(
-                            Assets.images.png.defaultPicture.path,
-                          ),
+                          child: Obx(() {
+                            return authController.profileImage.value != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    child: Image.file(
+                                      authController.profileImage.value!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Center(
+                                    child: Image.asset(
+                                      Assets.images.png.defaultPicture.path,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  );
+                          }),
                         ),
                       ),
                       SizedBox(
@@ -150,15 +164,11 @@ class _PersonalizePageState extends State<PersonalizePage> {
                           ),
                           Transform.scale(
                             scale:
-                                1.1, // Adjust this value to increase or decrease the size
+                                1, // Adjust this value to increase or decrease the size
                             child: Switch(
                               activeTrackColor: AppColors.primary,
                               value: true,
-                              onChanged: (value) {
-                                setState(() {
-                                  // _isOn = value;
-                                });
-                              },
+                              onChanged: (value) {},
                             ),
                           ),
                         ],

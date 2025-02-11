@@ -12,7 +12,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('asdf'),
+        child: Text('Dashboard Bandai Xa..'),
       ),
     );
   }
