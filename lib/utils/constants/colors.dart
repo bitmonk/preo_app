@@ -23,4 +23,5 @@ class AppColors {
   // Font Colors ->
   static const Color titleColor = Color(0xFF0E2741);
   static const Color formTextColor = Color(0xFF56687A);
+  static const Color black = Color(0xFF000000);
 }

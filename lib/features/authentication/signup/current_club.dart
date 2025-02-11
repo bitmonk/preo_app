@@ -6,7 +6,6 @@ import 'package:preo/features/authentication/auth_controller.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/sizes.dart';
-import 'package:preo/utils/device/device_utils.dart';
 import 'package:get/get.dart';
 import 'package:preo/utils/routes/routes.dart';
 
@@ -95,6 +94,44 @@ class _CurrentClubState extends State<CurrentClub> {
                                 authController.switchYesNoCheckbox(
                                     true); // Set to true for Yes
                               },
+                            ),
+                            SizedBox(height: 8.h,),
+                            Column(
+                              children: teams.map((team) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8.r)),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            13.w, 12.h, 10.w, 12.h),
+                                        child: Image(
+                                          image: AssetImage(
+                                            team['logoImage']!,
+                                          ),
+                                          height: 30.h,
+                                          width: 30.w,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            team['title']!,
+                                            style: Get
+                                                .theme.textTheme.headlineSmall,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             ),
                             SizedBox(
                               height: Sizes.spaceBtwItems,

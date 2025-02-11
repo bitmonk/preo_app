@@ -11,6 +11,7 @@ class Sizes {
   static final text = 14.sp;
 
   // FontWeight
+  static FontWeight font5 = FontWeight.w500;
   static FontWeight font6 = FontWeight.w600;
 
   // Default spacing between sections
