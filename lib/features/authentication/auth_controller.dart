@@ -14,6 +14,7 @@ class AuthController extends GetxController {
 
   Rx<bool> password = true.obs;
   Rx<bool> confirmPassword = true.obs;
+  Rx<bool> acceptedTC = false.obs;
   Rx<File?> profileImage = Rx<File?>(null);
   var selectedTeamIndex = (-1).obs;
 
@@ -87,6 +88,10 @@ class AuthController extends GetxController {
 
   void selectTeam(int index) {
     selectedTeamIndex.value = index;
+  }
+
+  void toggleTC(bool value) {
+    acceptedTC.value = !acceptedTC.value;
   }
 
   Future<void> pickImage() async {

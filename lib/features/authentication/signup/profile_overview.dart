@@ -20,7 +20,7 @@ class ProfileOverview extends StatefulWidget {
 class ProfileOverviewState extends State<ProfileOverview> {
   @override
   Widget build(BuildContext context) {
-    // AuthController authController = Get.put(AuthController());
+    AuthController authController = Get.put(AuthController());
     final List<Color> colors = [
       AppColors.primary,
       AppColors.neutral800,
@@ -70,12 +70,28 @@ class ProfileOverviewState extends State<ProfileOverview> {
                             ),
                             height: 128.h,
                             width: 128.w,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.r),
-                              child: Image.asset(
-                                Assets.images.png.profile.path,
-                                fit: BoxFit.cover,
-                              ),
+                            child: Obx(
+                              () {
+                                return authController.profileImage.value != null
+                                    ? ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          child: Image.file(
+                                            authController.profileImage.value!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      )
+                                    : Center(
+                                        child: Image.asset(
+                                          Assets.images.png.defaultPicture.path,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      );
+                              },
                             ),
                           ),
                           SizedBox(

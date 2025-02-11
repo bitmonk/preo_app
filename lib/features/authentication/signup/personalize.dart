@@ -73,22 +73,24 @@ class _PersonalizePageState extends State<PersonalizePage> {
                           ),
                           height: 98.h,
                           width: 98.h,
-                          child: Obx(() {
-                            return authController.profileImage.value != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    child: Image.file(
-                                      authController.profileImage.value!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : Center(
-                                    child: Image.asset(
-                                      Assets.images.png.defaultPicture.path,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                          }),
+                          child: Obx(
+                            () {
+                              return authController.profileImage.value != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      child: Image.file(
+                                        authController.profileImage.value!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Center(
+                                      child: Image.asset(
+                                        Assets.images.png.defaultPicture.path,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    );
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -163,12 +165,31 @@ class _PersonalizePageState extends State<PersonalizePage> {
                             ],
                           ),
                           Transform.scale(
-                            scale:
-                                1, // Adjust this value to increase or decrease the size
-                            child: Switch(
-                              activeTrackColor: AppColors.primary,
-                              value: true,
-                              onChanged: (value) {},
+                            scale: 1, // Keep the overall switch size unchanged
+                            child: Obx(
+                              () => Switch(
+                                inactiveThumbColor: AppColors.white,
+                                inactiveTrackColor: AppColors.neutral100,
+                                activeTrackColor: AppColors.primary,
+                                trackOutlineColor:
+                                    WidgetStateProperty.all(Colors.transparent),
+                                overlayColor:
+                                    WidgetStateProperty.all(Colors.transparent),
+                                thumbIcon:
+                                    WidgetStateProperty.resolveWith<Icon?>(
+                                  (states) {
+                                    return Icon(
+                                      Icons.circle, // Custom icon for thumb
+                                      size: 24, // Increase the thumb size
+                                      color: AppColors.white,
+                                    );
+                                  },
+                                ),
+                                value: authController.acceptedTC.value,
+                                onChanged: (value) {
+                                  authController.toggleTC(value);
+                                },
+                              ),
                             ),
                           ),
                         ],
