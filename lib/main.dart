@@ -33,20 +33,36 @@ class MainApp extends StatelessWidget {
               ),
               headlineMedium: TextStyle(
                 fontSize: Sizes.subHeading,
-                fontWeight: Sizes.font6,
+                fontWeight: Sizes.font5,
                 color: AppColors.titleColor,
               ),
               headlineSmall: TextStyle(
                 fontSize: Sizes.subTitle,
-                fontWeight: Sizes.font5,
+                fontWeight: Sizes.font6,
                 color: AppColors.black.withAlpha(140),
               ),
+              titleLarge: TextStyle(
+                fontSize: Sizes.miniSubHeading,
+                fontWeight: Sizes.font7,
+                color: AppColors.neutral900,
+              ),
+              bodyLarge: TextStyle(
+                fontSize: Sizes.title,
+                fontWeight: Sizes.font6,
+                color: AppColors.neutral900,
+              ),
               bodyMedium: TextStyle(
-                fontSize: 16.sp,
+                fontSize: Sizes.subTitle,
+                fontWeight: Sizes.font6,
                 color: AppColors.neutral900,
               ),
               bodySmall: TextStyle(
-                fontSize: 14.sp,
+                fontSize: Sizes.text,
+                color: AppColors.neutral900,
+                fontWeight: FontWeight.w400,
+              ),
+              labelLarge: TextStyle(
+                fontSize: Sizes.labelLg,
                 color: AppColors.neutral900,
                 fontWeight: FontWeight.w400,
               ),

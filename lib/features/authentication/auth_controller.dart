@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:preo/features/games/home.dart';
+import 'package:preo/features/Home/dashboard.dart';
+import 'package:preo/utils/routes/routes.dart';
 
 class AuthController extends GetxController {
   final emailController = TextEditingController().obs;
@@ -60,7 +61,7 @@ class AuthController extends GetxController {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'success');
-        Get.off(() => HomePage());
+        Get.off(Routes.getDashboard());
       } else {
         Get.snackbar('Error', data.toString());
       }
@@ -71,13 +72,17 @@ class AuthController extends GetxController {
 
   void selectSingleTeam(int index) {
     if (selectedTeamIndex.value == index) {
-      selectedTeamIndex.value = -1; // Unselect if already selected
+      selectedTeamIndex.value = -1;
     } else {
       selectedTeamIndex.value = index;
     }
   }
 
   void switchYesNoCheckbox(bool value) {
-    selectedValue.value = value; // Directly set the value
+    selectedValue.value = value;
+  }
+
+  void selectTeam(int index) {
+    selectedTeamIndex.value = index;
   }
 }

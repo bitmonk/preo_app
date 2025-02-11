@@ -92,6 +92,12 @@ class _SignupState extends State<Signup> {
                               AppTextFormField(
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
+                                labelText: 'Name',
+                              ),
+                              SizedBox(height: Sizes.spaceBtwItems),
+                              AppTextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 labelText: 'Email Address',
                                 validator: ValidationBuilder()
                                     .email()

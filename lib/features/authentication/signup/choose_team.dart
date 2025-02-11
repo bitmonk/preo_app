@@ -205,7 +205,12 @@ class TeamSelectionList extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Text(subtitle),
+          subtitle: Text(
+            subtitle,
+            style: TextStyle(fontWeight: FontWeight.w400),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
           trailing: Container(
             height: 24,
             width: 24,

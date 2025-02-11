@@ -9,10 +9,13 @@ class Sizes {
   static final title = 18.sp;
   static final subTitle = 16.sp;
   static final text = 14.sp;
+  static final labelLg = 12.sp;
 
   // FontWeight
+  static FontWeight fon4 = FontWeight.w400;
   static FontWeight font5 = FontWeight.w500;
   static FontWeight font6 = FontWeight.w600;
+  static FontWeight font7 = FontWeight.w700;
 
   // Default spacing between sections
   static double spaceBtwSections = 56.h;
@@ -22,4 +25,6 @@ class Sizes {
   static double mdSpace = 24.h;
   static double spaceBtwItems = 16.h;
   static double spaceBtwItemsRowItems = 12.w;
+
+  static double smallHeight = 8.h;
 }

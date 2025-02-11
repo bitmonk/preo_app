@@ -38,6 +38,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/explainer
   $AssetsImagesExplainerGen get explainer => const $AssetsImagesExplainerGen();
 
+  /// Directory path: assets/images/png
+  $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+
   /// Directory path: assets/images/splash
   $AssetsImagesSplashGen get splash => const $AssetsImagesSplashGen();
 
@@ -90,6 +93,21 @@ class $AssetsImagesExplainerGen {
     explainer3,
     explainer4,
   ];
+}
+
+class $AssetsImagesPngGen {
+  const $AssetsImagesPngGen();
+
+  /// File path: assets/images/png/default_picture.png
+  AssetGenImage get defaultPicture =>
+      const AssetGenImage('assets/images/png/default_picture.png');
+
+  /// File path: assets/images/png/profile.png
+  AssetGenImage get profile =>
+      const AssetGenImage('assets/images/png/profile.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [defaultPicture, profile];
 }
 
 class $AssetsImagesSplashGen {

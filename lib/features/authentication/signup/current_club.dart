@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:preo/common/widgets/primary_button.dart';
 import 'package:preo/common/widgets/stepper.dart';
+import 'package:preo/data/team_data.dart';
 import 'package:preo/features/authentication/auth_controller.dart';
-import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/sizes.dart';
-import 'package:get/get.dart';
 import 'package:preo/utils/routes/routes.dart';
 
 class CurrentClub extends StatefulWidget {
@@ -19,40 +19,8 @@ class CurrentClub extends StatefulWidget {
 class _CurrentClubState extends State<CurrentClub> {
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> teams = [
-      {
-        'title': 'Vikings Rugby',
-        'logoImage': Assets.images.teams.vikings.path,
-        'subtitle': 'Cheer for the Vikings and conquer the field!',
-      },
-      {
-        'title': 'Western Rugby',
-        'logoImage': Assets.images.teams.western.path,
-        'subtitle': 'Join Western Rugby for an unforgettable season!',
-      },
-      {
-        'title': 'Melbourne',
-        'logoImage': Assets.images.teams.melbourne.path,
-        'subtitle': 'Support Melbourne and witness greatness!',
-      },
-      {
-        'title': 'Vikings Rugby',
-        'logoImage': Assets.images.teams.vikings.path,
-        'subtitle': 'Cheer for the Vikings and conquer the field!',
-      },
-      {
-        'title': 'Western Rugby',
-        'logoImage': Assets.images.teams.western.path,
-        'subtitle': 'Join Western Rugby for an unforgettable season!',
-      },
-      {
-        'title': 'Melbourne',
-        'logoImage': Assets.images.teams.melbourne.path,
-        'subtitle': 'Support Melbourne and witness greatness!',
-      },
-    ];
-
     AuthController authController = Get.put(AuthController());
+    final teamData = TeamData();
 
     return Scaffold(
       appBar: AppBar(
@@ -91,57 +59,85 @@ class _CurrentClubState extends State<CurrentClub> {
                               title: 'Yes',
                               value: authController.selectedValue.value,
                               onChanged: (value) {
-                                authController.switchYesNoCheckbox(
-                                    true); // Set to true for Yes
+                                authController.switchYesNoCheckbox(true);
                               },
                             ),
-                            SizedBox(height: 8.h,),
-                            Column(
-                              children: teams.map((team) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8.r)),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            13.w, 12.h, 10.w, 12.h),
-                                        child: Image(
-                                          image: AssetImage(
-                                            team['logoImage']!,
+                            SizedBox(height: 8.h),
+
+                            // Show teams dropdown only when "Yes" is selected
+                            if (authController.selectedValue.value)
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Column(
+                                  children: teamData.teams
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                    int index = entry.key;
+                                    Map<String, String> team = entry.value;
+
+                                    return GestureDetector(
+                                      onTap: () {
+                                        authController.selectTeam(index);
+                                      },
+                                      child: Obx(
+                                        () => Container(
+                                          // margin:
+                                          // EdgeInsets.symmetric(vertical: 6.h),
+                                          decoration: BoxDecoration(
+                                            color: authController
+                                                        .selectedTeamIndex
+                                                        .value ==
+                                                    index
+                                                ? AppColors.selectedBg
+                                                : Colors.white,
+                                            // borderRadius:
+                                            //     BorderRadius.circular(8.r),
                                           ),
-                                          height: 30.h,
-                                          width: 30.w,
-                                          fit: BoxFit.cover,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 16.w, vertical: 12.h),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 10.w),
+                                                child: Image(
+                                                  image: AssetImage(
+                                                      team['logoImage']!),
+                                                  height: 30.h,
+                                                  width: 30.w,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    team['title']!,
+                                                    style: Get.theme.textTheme
+                                                        .headlineSmall,
+                                                  ),
+                                                  SizedBox(height: 4.h),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      SizedBox(width: 16),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            team['title']!,
-                                            style: Get
-                                                .theme.textTheme.headlineSmall,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                            SizedBox(
-                              height: Sizes.spaceBtwItems,
-                            ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+
+                            SizedBox(height: Sizes.spaceBtwItems),
                             YesNoCheckbox(
                               title: 'No',
                               value: !authController.selectedValue.value,
                               onChanged: (value) {
-                                authController.switchYesNoCheckbox(
-                                    false); // Set to false for No
+                                authController.switchYesNoCheckbox(false);
                               },
                             ),
                           ],
@@ -151,43 +147,46 @@ class _CurrentClubState extends State<CurrentClub> {
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      btnText: 'Continue',
-                      onPressed: () {
-                        // Get.toNamed(Routes.getLoginRoute());
-                      },
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: PrimaryButton(
+                        btnText: 'Continue',
+                        onPressed: () {
+                          Get.toNamed(Routes.getPersonalise());
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(height: Sizes.mdSpace),
-                  GestureDetector(
-                    onTap: () => Get.toNamed(Routes.getLoginRoute()),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: AppColors.titleColor,
-                          ),
-                          children: const <TextSpan>[
-                            TextSpan(text: 'Do you have an account? '),
-                            TextSpan(
-                              text: 'Sign In',
-                              style: TextStyle(color: AppColors.primary),
+                    SizedBox(height: Sizes.mdSpace),
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.getLoginRoute()),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.w),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.titleColor,
                             ),
-                          ],
+                            children: const <TextSpan>[
+                              TextSpan(text: 'Do you have an account? '),
+                              TextSpan(
+                                text: 'Sign In',
+                                style: TextStyle(color: AppColors.primary),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: 20.h), // Adds space at the bottom
+              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -211,8 +210,7 @@ class YesNoCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Trigger the onChanged callback when the row is tapped
-        onChanged(!value); // Toggle the value when tapped
+        onChanged(!value);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -233,13 +231,11 @@ class YesNoCheckbox extends StatelessWidget {
               style: Get.theme.textTheme.bodySmall,
             ),
             Transform.scale(
-              scale:
-                  1.1, // Adjust the scale factor as needed (e.g., 1.5 for 50% larger)
+              scale: 1.1,
               child: Checkbox(
                 activeColor: Get.theme.primaryColor,
                 value: value,
-                onChanged:
-                    onChanged, // Disable the checkbox's onChanged since it's handled by the row tap
+                onChanged: onChanged,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
             ),
