@@ -34,6 +34,7 @@ class PrimaryButton extends StatelessWidget {
       child: Text(
         btnText,
         style: TextStyle(
+          fontSize: Sizes.subTitle,
           color: AppColors.white,
           fontWeight: Sizes.font6,
         ),

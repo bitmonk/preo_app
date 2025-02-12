@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:preo/features/Home/dashboard.dart';
+import 'package:preo/features/Home/dashboard/dashboard.dart';
+import 'package:preo/features/Home/home.dart';
 import 'package:preo/features/authentication/login/email_verification.dart';
 import 'package:preo/features/authentication/login/enter_new_pass.dart';
 import 'package:preo/features/authentication/login/forgot_pass.dart';
@@ -84,7 +85,7 @@ class Routes {
     ),
     GetPage(
       name: dashboard,
-      page: () => Dashboard(),
+      page: () => Home(),
     ),
   ];
 }

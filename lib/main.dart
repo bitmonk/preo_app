@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:preo/features/Home/home_controller.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/constants/sizes.dart';
 import 'package:preo/utils/routes/routes.dart';
 
 void main() {
+  Get.put<HomeController>(HomeController());
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
@@ -46,11 +48,11 @@ class MainApp extends StatelessWidget {
                 fontWeight: Sizes.font7,
                 color: AppColors.neutral900,
               ),
-              bodyLarge: TextStyle(
-                fontSize: Sizes.title,
-                fontWeight: Sizes.font6,
-                color: AppColors.neutral900,
-              ),
+              // bodyLarge: TextStyle(
+              //   fontSize: Sizes.title,
+              //   fontWeight: Sizes.font6,
+              //   color: AppColors.neutral900,
+              // ),
               bodyMedium: TextStyle(
                 fontSize: Sizes.subTitle,
                 fontWeight: Sizes.font6,
@@ -65,6 +67,11 @@ class MainApp extends StatelessWidget {
                 fontSize: Sizes.labelLg,
                 color: AppColors.neutral900,
                 fontWeight: FontWeight.w400,
+              ),
+              titleMedium: TextStyle(
+                fontSize: Sizes.title,
+                fontWeight: Sizes.font6,
+                color: AppColors.neutral900,
               ),
             ),
           ),

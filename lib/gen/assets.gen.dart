@@ -28,8 +28,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/eye_slash.svg
   String get eyeSlash => 'assets/icons/eye_slash.svg';
 
+  /// File path: assets/icons/preos.png
+  AssetGenImage get preosPng => const AssetGenImage('assets/icons/preos.png');
+
+  /// File path: assets/icons/preos.svg
+  String get preosSvg => 'assets/icons/preos.svg';
+
   /// List of all assets
-  List<dynamic> get values => [backArrow, calendar, confetti, eye, eyeSlash];
+  List<dynamic> get values => [
+        backArrow,
+        calendar,
+        confetti,
+        eye,
+        eyeSlash,
+        preosPng,
+        preosSvg,
+      ];
+
+  get preos => null;
 }
 
 class $AssetsImagesGen {
@@ -88,26 +104,39 @@ class $AssetsImagesExplainerGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    explainer1,
-    explainer2,
-    explainer3,
-    explainer4,
-  ];
+        explainer1,
+        explainer2,
+        explainer3,
+        explainer4,
+      ];
 }
 
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
+  /// File path: assets/images/png/6314708.png
+  AssetGenImage get a6314708 =>
+      const AssetGenImage('assets/images/png/6314708.png');
+
   /// File path: assets/images/png/default_picture.png
   AssetGenImage get defaultPicture =>
       const AssetGenImage('assets/images/png/default_picture.png');
+
+  /// File path: assets/images/png/image-20161118-19352-8943y2.jpg
+  AssetGenImage get image20161118193528943y2 =>
+      const AssetGenImage('assets/images/png/image-20161118-19352-8943y2.jpg');
 
   /// File path: assets/images/png/profile.png
   AssetGenImage get profile =>
       const AssetGenImage('assets/images/png/profile.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [defaultPicture, profile];
+  List<AssetGenImage> get values => [
+        a6314708,
+        defaultPicture,
+        image20161118193528943y2,
+        profile,
+      ];
 }
 
 class $AssetsImagesSplashGen {

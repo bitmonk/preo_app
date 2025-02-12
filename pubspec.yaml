@@ -42,7 +42,9 @@ flutter:
     - assets/icons/eye.svg
     - assets/icons/eye_slash.svg
     - assets/icons/calendar.svg
+    - assets/icons/preos.png
 
+    - assets/icons/preos.svg
   generate: true
 
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:preo/features/Home/dashboard.dart';
+import 'package:preo/features/Home/home.dart';
 import 'package:preo/utils/routes/routes.dart';
 
 class AuthController extends GetxController {
