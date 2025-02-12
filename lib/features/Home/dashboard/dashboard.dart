@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:preo/common/widgets/app_spacing.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
+import 'package:preo/utils/constants/nav_ids.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -79,6 +80,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed('/home/details', id: NavIds.home);
+            },
+            child: Text('next'),
+          )
         ],
       ),
     );
