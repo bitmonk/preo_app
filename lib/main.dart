@@ -77,7 +77,7 @@ class MainApp extends StatelessWidget {
           ),
           defaultTransition: Transition.fadeIn,
           transitionDuration: Duration(milliseconds: 100),
-          initialRoute: Routes.getSignupRoute(),
+          initialRoute: Routes.getDashboard(),
           getPages: Routes.routes,
         );
       },

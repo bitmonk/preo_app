@@ -28,24 +28,70 @@ class $AssetsIconsGen {
   /// File path: assets/icons/eye_slash.svg
   String get eyeSlash => 'assets/icons/eye_slash.svg';
 
+  /// File path: assets/icons/game_icon.svg
+  String get gameIcon => 'assets/icons/game_icon.svg';
+
+  /// File path: assets/icons/home_icon.svg
+  String get homeIcon => 'assets/icons/home_icon.svg';
+
+  /// File path: assets/icons/medal-star.svg
+  String get medalStar => 'assets/icons/medal-star.svg';
+
+  /// File path: assets/icons/notification.svg
+  String get notification => 'assets/icons/notification.svg';
+
+  /// File path: assets/icons/people.svg
+  String get people => 'assets/icons/people.svg';
+
   /// File path: assets/icons/preos.png
   AssetGenImage get preosPng => const AssetGenImage('assets/icons/preos.png');
 
   /// File path: assets/icons/preos.svg
   String get preosSvg => 'assets/icons/preos.svg';
 
+  /// File path: assets/icons/profile.svg
+  String get profile => 'assets/icons/profile.svg';
+
+  /// File path: assets/icons/selected_game.svg
+  String get selectedGame => 'assets/icons/selected_game.svg';
+
+  /// File path: assets/icons/selected_group.svg
+  String get selectedGroup => 'assets/icons/selected_group.svg';
+
+  /// File path: assets/icons/selected_home.svg
+  String get selectedHome => 'assets/icons/selected_home.svg';
+
+  /// File path: assets/icons/selected_notification.svg
+  String get selectedNotification => 'assets/icons/selected_notification.svg';
+
+  /// File path: assets/icons/selected_profile.svg
+  String get selectedProfile => 'assets/icons/selected_profile.svg';
+
+  /// File path: assets/icons/user_icon.svg
+  String get userIcon => 'assets/icons/user_icon.svg';
+
   /// List of all assets
   List<dynamic> get values => [
-        backArrow,
-        calendar,
-        confetti,
-        eye,
-        eyeSlash,
-        preosPng,
-        preosSvg,
-      ];
-
-  get preos => null;
+    backArrow,
+    calendar,
+    confetti,
+    eye,
+    eyeSlash,
+    gameIcon,
+    homeIcon,
+    medalStar,
+    notification,
+    people,
+    preosPng,
+    preosSvg,
+    profile,
+    selectedGame,
+    selectedGroup,
+    selectedHome,
+    selectedNotification,
+    selectedProfile,
+    userIcon,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -104,11 +150,11 @@ class $AssetsImagesExplainerGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        explainer1,
-        explainer2,
-        explainer3,
-        explainer4,
-      ];
+    explainer1,
+    explainer2,
+    explainer3,
+    explainer4,
+  ];
 }
 
 class $AssetsImagesPngGen {
@@ -132,11 +178,11 @@ class $AssetsImagesPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        a6314708,
-        defaultPicture,
-        image20161118193528943y2,
-        profile,
-      ];
+    a6314708,
+    defaultPicture,
+    image20161118193528943y2,
+    profile,
+  ];
 }
 
 class $AssetsImagesSplashGen {

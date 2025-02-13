@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:preo/features/Home/dashboard/dashboard.dart';
+import 'package:preo/features/Home/screens/dashboard/dashboard.dart';
 import 'package:preo/features/Home/home.dart';
 import 'package:preo/features/authentication/login/email_verification.dart';
 import 'package:preo/features/authentication/login/enter_new_pass.dart';

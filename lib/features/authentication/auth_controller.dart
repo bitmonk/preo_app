@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:preo/features/Home/home.dart';
+import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/routes/routes.dart';
 
 class AuthController extends GetxController {
@@ -19,6 +20,7 @@ class AuthController extends GetxController {
   var selectedTeamIndex = (-1).obs;
   var selectedTeamLogo = ''.obs;
   var selectedTeamName = ''.obs;
+  Rx<Color> selectedColor = Rx<Color>(AppColors.black);
 
   // Validation state for password
   RxBool hasMinLength = false.obs;

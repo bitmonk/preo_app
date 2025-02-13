@@ -123,7 +123,8 @@ class _PersonalizePageState extends State<PersonalizePage> {
                             children: colors.map((color) {
                               return GestureDetector(
                                 onTap: () {
-                                  print('Selected color: $color');
+                                  authController.selectedColor.value = color;
+                                  // print('Selected color: $color.');
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(right: 12.w),
