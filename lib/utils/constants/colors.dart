@@ -20,6 +20,7 @@ class AppColors {
 
 // UI Colors ->
   static const Color secondary = Color(0xFFDA3B30);
+  static const Color secondary50 = Color(0xFFEBEAFB);
   static const Color secondary100 = Color(0xFFC2C1F4);
   static const Color secondary500 = Color(0xFF3530D9);
   static const Color bgColor = Color(0xFFFBF8F8);
@@ -30,4 +31,9 @@ class AppColors {
   static const Color titleColor = Color(0xFF0E2741);
   static const Color formTextColor = Color(0xFF56687A);
   static const Color black = Color(0xFF000000);
+  // Misc ->
+  static const Color linupGame = secondary500;
+  static const Color memoryGame = Color(0xFFD444F1);
+  static const Color memoryGameBg = Color(0xFFFDF4FF);
+  static const Color sinnersGame = error500;
 }

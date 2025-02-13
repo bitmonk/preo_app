@@ -31,11 +31,20 @@ class $AssetsIconsGen {
   /// File path: assets/icons/game_icon.svg
   String get gameIcon => 'assets/icons/game_icon.svg';
 
+  /// File path: assets/icons/group1.svg
+  String get group1 => 'assets/icons/group1.svg';
+
   /// File path: assets/icons/home_icon.svg
   String get homeIcon => 'assets/icons/home_icon.svg';
 
+  /// File path: assets/icons/lineup_icon.svg
+  String get lineupIcon => 'assets/icons/lineup_icon.svg';
+
   /// File path: assets/icons/medal-star.svg
   String get medalStar => 'assets/icons/medal-star.svg';
+
+  /// File path: assets/icons/memory_icon.svg
+  String get memoryIcon => 'assets/icons/memory_icon.svg';
 
   /// File path: assets/icons/notification.svg
   String get notification => 'assets/icons/notification.svg';
@@ -67,6 +76,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/selected_profile.svg
   String get selectedProfile => 'assets/icons/selected_profile.svg';
 
+  /// File path: assets/icons/sinner_icon.svg
+  String get sinnerIcon => 'assets/icons/sinner_icon.svg';
+
+  /// File path: assets/icons/solo.svg
+  String get solo => 'assets/icons/solo.svg';
+
   /// File path: assets/icons/user_icon.svg
   String get userIcon => 'assets/icons/user_icon.svg';
 
@@ -78,8 +93,11 @@ class $AssetsIconsGen {
     eye,
     eyeSlash,
     gameIcon,
+    group1,
     homeIcon,
+    lineupIcon,
     medalStar,
+    memoryIcon,
     notification,
     people,
     preosPng,
@@ -90,6 +108,8 @@ class $AssetsIconsGen {
     selectedHome,
     selectedNotification,
     selectedProfile,
+    sinnerIcon,
+    solo,
     userIcon,
   ];
 }

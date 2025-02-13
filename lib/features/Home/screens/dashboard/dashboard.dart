@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:preo/common/widgets/app_spacing.dart';
+import 'package:preo/data/game_model.dart';
+import 'package:preo/features/Home/widgets/game_card_container.dart';
 import 'package:preo/gen/assets.gen.dart';
 import 'package:preo/utils/constants/colors.dart';
 
@@ -14,6 +16,24 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final List<Game> games = [
+    Game(
+      name: GameName.sinners,
+      type: GameType.group,
+      status: "Pending",
+    ),
+    Game(
+      name: GameName.lineUp,
+      type: GameType.solo,
+      status: "Pending",
+    ),
+    Game(
+      name: GameName.memory,
+      type: GameType.group,
+      status: "Pending",
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +63,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-                        
-                      },
+                      onPressed: () {},
                       child: Text(
                         'View All',
                         style: TextStyle(
@@ -56,6 +74,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     )
                   ],
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: GameEnum.values.map((gameEnum) {
+                    return GameCardContainer(
+                      gameEnum: gameEnum,
+                      showDate: true,
+                    );
+                  }).toList(),
                 ),
               ),
             ],
@@ -133,5 +162,53 @@ class DashboardHeading extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+enum GameEnum { lineUp, sinners, memory }
+
+extension GameEnumExtension on GameEnum {
+  String title() {
+    switch (this) {
+      case GameEnum.lineUp:
+        return 'LineUp';
+      case GameEnum.sinners:
+        return 'Sinners';
+      case GameEnum.memory:
+        return 'Memory';
+    }
+  }
+
+  Color primaryColor() {
+    switch (this) {
+      case GameEnum.lineUp:
+        return AppColors.secondary500;
+      case GameEnum.sinners:
+        return AppColors.error500;
+      case GameEnum.memory:
+        return AppColors.memoryGame;
+    }
+  }
+
+  Color secondaryColor() {
+    switch (this) {
+      case GameEnum.lineUp:
+        return AppColors.linupGame;
+      case GameEnum.sinners:
+        return AppColors.sinnersGame;
+      case GameEnum.memory:
+        return AppColors.memoryGame;
+    }
+  }
+
+  String gameIcon() {
+    switch (this) {
+      case GameEnum.lineUp:
+        return Assets.icons.lineupIcon;
+      case GameEnum.sinners:
+        return Assets.icons.sinnerIcon;
+      case GameEnum.memory:
+        return Assets.icons.memoryIcon;
+    }
   }
 }

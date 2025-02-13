@@ -10,9 +10,10 @@ class Sizes {
   static final subTitle = 16.sp;
   static final text = 14.sp;
   static final labelLg = 12.sp;
+  static final labelSm = 10.sp;
 
   // FontWeight
-  static FontWeight fon4 = FontWeight.w400;
+  static FontWeight font4 = FontWeight.w400;
   static FontWeight font5 = FontWeight.w500;
   static FontWeight font6 = FontWeight.w600;
   static FontWeight font7 = FontWeight.w700;

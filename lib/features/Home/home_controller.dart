@@ -8,14 +8,6 @@ class HomeController extends GetxController {
   var currentIndex = 0.obs;
   PersistentTabController persistentTabController =
       PersistentTabController(initialIndex: 0);
-  void changeIndex(int newIndex) {
-    if (currentIndex.value != newIndex) {
-      Get.nestedKey(currentIndex.value)?.currentState?.popUntil(
-            (route) => route.isFirst,
-          );
-      currentIndex.value = newIndex;
-    }
-  }
 
   updateCurrentNavIndex(int index) {
     selectedIndex.value = index;

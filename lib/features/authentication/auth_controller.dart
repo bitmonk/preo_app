@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:preo/features/Home/home.dart';
 import 'package:preo/utils/constants/colors.dart';
 import 'package:preo/utils/routes/routes.dart';
 
@@ -82,8 +81,8 @@ class AuthController extends GetxController {
   void selectSingleTeam(int index, String logo, String name) {
     if (selectedTeamIndex.value == index) {
       selectedTeamIndex.value = -1;
-      selectedTeamLogo.value = ''; // Reset logo
-      selectedTeamName.value = ''; // Reset name
+      selectedTeamLogo.value = '';
+      selectedTeamName.value = '';
     } else {
       selectedTeamIndex.value = index;
       selectedTeamLogo.value = logo;
